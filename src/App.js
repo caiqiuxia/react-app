@@ -1,14 +1,25 @@
 import React, { Fragment } from 'react'
+import Login from './pages/login'
+import Home from './pages/home'
+// react-router
+import { HashRouter, Route, Switch, Redirect } from 'react-router-dom'
+// redux
+import { Provider } from 'react-redux'
+import redux from './redux'
 
 function App() {
   return (
       <Fragment>
-        <div className="App">
-          <h1>This is React App.</h1>
-        </div>
-        <div className="App-other">
-          <h1>This is React App-ohter.</h1>
-        </div>
+        <Provider store={redux()}>
+          <HashRouter>
+            <Switch>
+              <Route path="/login" component={Login} />
+              <Route path="/home" component={Home} />
+              <Route exact path="/" component={Login} />
+              <Redirect to={"/login"} />
+            </Switch>
+          </HashRouter>
+        </Provider>
       </Fragment>
   )
 }
